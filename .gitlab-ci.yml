@@ -1,7 +1,6 @@
 stages:
   - pull
   - build
-  - lint
   - push
   - deploy
   - cleanup
@@ -19,15 +18,6 @@ build:
   stage: build
   script:
     - docker build --tag="$CI_PIPELINE_ID":"$CI_COMMIT_REF_NAME" --cache-from="$CI_REGISTRY_IMAGE":latest .
-
-lint:
-  stage: lint
-  only:
-    - master
-  script:
-    - export CI_PIPELINE_ID=$CI_PIPELINE_ID
-    - export CI_BUILD_REF_NAME=$CI_COMMIT_REF_NAME
-    - docker-compose -p "$CI_PIPELINE_ID" -f docker-compose.ci.yml run app app .
 
 push image:
   stage: push
