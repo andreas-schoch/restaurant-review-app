@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+coverage run ./manage.py makemigrations
 
 coverage run ./manage.py test --noinput
 
