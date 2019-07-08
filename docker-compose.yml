@@ -6,17 +6,22 @@ services:
     ports:
       - "5432:5432"
   backend:
-    build: ./api
+    image: registry.gitlab.propulsion-home.ch/x/backend
     command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    command: "/usr/sbin/sshd -D"
+    restart: always
+    env_file:
+      - ./api/dev.env
     volumes:
       - ./api:/app/api
     ports:
       - "8000:8000"
+      - "4738:22"
     depends_on:
       - db
   frontend:
-    build: ./frontend
-    command: ["npm", "start"]
+    image: registry.gitlab.propulsion-home.ch/x/frontend
+    command: ["npm", "run", "start"]
     volumes:
       - ./frontend:/app/frontend
       - node-modules:/app/frontend/node_modules
