@@ -21,23 +21,23 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 # End: SSH
 
 
-RUN mkdir -p /app && \
+RUN mkdir -p /aries && \
     mkdir -p /scripts && \
     mkdir -p /media-files && \
     mkdir -p /static-files
 
-COPY ./app/requirements.yml /app/requirements.yml
+COPY ./aries/requirements.yml /aries/requirements.yml
 
-RUN /opt/conda/bin/conda env create -f /app/requirements.yml
-ENV PATH /opt/conda/envs/app/bin:$PATH
-RUN sed '$ a conda activate app' -i /root/.bashrc
+RUN /opt/conda/bin/conda env create -f /aries/requirements.yml
+ENV PATH /opt/conda/envs/aries/bin:$PATH
+RUN sed '$ a conda activate aries' -i /root/.bashrc
 
-COPY ./app /app
+COPY ./aries /aries
 
 COPY ./scripts /scripts
 RUN chmod +x /scripts/*
 
-WORKDIR /app
+WORKDIR /aries
 
 EXPOSE 8000
 EXPOSE 22
