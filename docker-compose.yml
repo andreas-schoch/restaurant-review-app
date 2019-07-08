@@ -1,27 +1,29 @@
 version: '3'
-
 services:
-  db:
-    image: postgres
-    ports:
-      - "5432:5432"
-  django:
-    image: registry.gitlab.propulsion-home.ch/full-stack/batch-05-2019/group-projects/aries:backend
-    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+  database:
+    image: postgres:latest
+    restart: always
+    env_file:
+      - dev.env
     volumes:
-      - ./app:/app/app
+      - database:/var/lib/postgresql/data
+
+  app:
+    image: registry.gitlab.propulsion-home.ch/full-stack/batch-05-2019/group-projects/aries
+    command: "/usr/sbin/sshd -D"
+    restart: always
+    env_file:
+      - dev.env
     ports:
-      - "8000:8000"
+      - "8090:8000"
+      - "4738:22"
     depends_on:
-      - db
-  frontend:
-    image: registry.gitlab.propulsion-home.ch/full-stack/batch-05-2019/group-projects/aries:frontend
-    command: ["npm", "start"]
+      - database
     volumes:
-      - ./frontend:/app/frontend
-      - node-modules:/app/frontend/node_modules
-    ports:
-      - "3000:3000"
+      - ./app:/app
+      - ./media-files:/media-files
+      - ./static-files:/static-files
+      - ./scripts:/scripts
 
 volumes:
-  node-modules:
+  database:
