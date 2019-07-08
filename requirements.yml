@@ -1,4 +1,0 @@
-name: personal-project-ticket-blueprint
-requirements:
-  - pip:
-      - dotenv

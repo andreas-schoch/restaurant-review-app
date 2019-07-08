@@ -1,5 +1,0 @@
-gitlab: https://gitlab.propulsion-home.ch
-source-project: 1839
-# Add a list of project ids in which you want to add the tickets
-projects:
-  -
