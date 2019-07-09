@@ -52,6 +52,8 @@ services:
         - /opt/portainer/data:/data
     networks:
         - nginx_network
+    ports:
+      - "9000:9000"
 
 networks:  # <-- and here
   nginx_network:
