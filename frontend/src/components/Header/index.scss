@@ -5,8 +5,11 @@
     height: 75px;
     align-items: center;
     padding: 0 20px;
+    background-color: white;
     .main-header-nav > a {
         margin-left: 30px;
+        font-size: 1.25rem;
+        color: #111;
     }
     .main-header-btns {
         margin-left: 50px;

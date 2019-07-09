@@ -1,6 +1,7 @@
 import React from 'react';
 import {  Link } from 'react-router-dom';
-import './index.css';
+import './index.scss';
+import { Button } from '../../styled'
 
 // TODO replace button and input with styled components
 const SearchHeader = (props) => {
@@ -8,9 +9,8 @@ const SearchHeader = (props) => {
         <div className='search-header'>
             <form className='search-header-form'>
                 <input type='search'/>
-                <button type='submit'>Search</button>
+                <Button>Search</Button>
             </form>
-
         </div>
     );
 };

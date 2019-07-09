@@ -10,6 +10,7 @@ import App from './components/App';
 import Home from './components/Home';
 import UserProfile from './components/UserProfile';
 import Login from './components/Login';
+import Search from './components/Search';
 
 
 ReactDOM.render(
@@ -19,6 +20,9 @@ ReactDOM.render(
                 <App>
                     <Route  path='/' exact component={ Home } />
                     <Route  path='/login' exact component={ Login } />
+                    <Route  path='/search' exact component={ Search } />
+                    <Route  path='/restaurants'  component={ Login } />
+                    <Route  path='/restaurants/:restaurant_id'  component={ Login } />
                     <Route  path='/me' component={ UserProfile } />
                 </App>
             </Switch>

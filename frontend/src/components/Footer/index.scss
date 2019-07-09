@@ -1,18 +1,27 @@
 .main-footer {
+    margin-top: auto;
     width: 100%;
     background-color: white;
     .main-footer-nav {
         display: flex;
         flex-flow: row nowrap;
         justify-content: space-between;
-        padding: 20px 30px;
+        padding: 1rem 30px;
         align-items: center;
         border-bottom: 1px solid grey;
-        & a { margin-right: 10px; }
-        & a:last-of-type { margin-right: 0; }
+        .main-footer-nav-left a { margin-right: 75px; }
+        .main-footer-nav-right a {
+            margin-left: 22px;
+            border-radius: 100%;
+        }
+        a {
+            color: black;
+            font-size: 20px;
+        }
     }
     .main-footer-nav-copyright {
         margin: 0;
-        padding: 5px 30px;
+        font-size: 14px;
+        padding: 10px 30px;
     }
 }

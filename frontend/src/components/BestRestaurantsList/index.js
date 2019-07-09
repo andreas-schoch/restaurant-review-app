@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-
-import RestaurantCard from '../RestaurantCard'
-import SearchHeader from "../SearchHeader";
+import './index.scss';
 import GenericRestaurantList from "../GenericRestaurantList";
 
 // this page was supposed to display the 4 best rated restaurants.
@@ -10,11 +8,10 @@ import GenericRestaurantList from "../GenericRestaurantList";
 // TODO create a container which filters the 4 most commented restaurants in the mapstatetoprops
 const BestRestaurantsList = (props) =>  {
     return (
-        <>
-            <SearchHeader/>
+        <div className='best-restaurant-list'>
             <h2>Best Rated Restaurants</h2>
             <GenericRestaurantList restaurants={ props.restaurants }/>
-        </>
+        </div>
     )
 };
 

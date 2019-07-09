@@ -1,0 +1,19 @@
+.search-header {
+    margin: 0 auto;
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 1440px;
+    height: 350px;
+    background-image: url("https://via.placeholder.com/1440x350");
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-header-form {
+    input {
+        width: 530px;
+        height: 55px;
+    }
+}
