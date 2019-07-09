@@ -28,37 +28,36 @@ class GetAllRestaurantsView(ListCreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class GetPostUpdateDeleteRestaurant(RetrieveUpdateDestroyAPIView):
+class GetPostUpdateDeleteRestaurantView(RetrieveUpdateDestroyAPIView):
     """
     Class to GET - PUT/PATCH (UPDATE) - DELETE: Restaurant by id
     """
     serializer_class = RestaurantsSerializer
 
-
     def get_object(self, pk):
-        post = get_object_or_404(Restaurant, pk=pk)
-        return post
+        restaurant = get_object_or_404(Restaurant, pk=pk)
+        return restaurant
 
     def get(self, request, pk):
-        post = self.get_object(pk)
-        serializer = RestaurantsSerializer(post)
+        restaurant = self.get_object(pk)
+        serializer = RestaurantsSerializer(restaurant)
         return Response(serializer.data)
 
     def put(self, request, pk):
-        post = self.get_object(pk)
-        serializer = RestaurantsSerializer(post, data=request.data)
+        restaurant = self.get_object(pk)
+        serializer = RestaurantsSerializer(restaurant, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({"Status 201": "Restaurant updated succesfully"}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        post = self.get_object(pk)
-        post.delete()
+        restaurant = self.get_object(pk)
+        restaurant.delete()
         return Response({"Status 204": "Restaurant deleted succesfully"}, status=status.HTTP_204_NO_CONTENT)
 
 
-class GetRestaurantByCategory(ListAPIView):
+class GetRestaurantByCategoryView(ListAPIView):
     """
     Class to GET all the restaurants by category
     """
@@ -71,7 +70,7 @@ class GetRestaurantByCategory(ListAPIView):
         return Restaurant.objects.filter(category=category)
 
 
-class GetRestaurantByUserID(generics.ListAPIView):
+class GetRestaurantByUserIDView(generics.ListAPIView):
     """
     Class to Get the all the restaurants owned (created) by a specific user in chronological order.
     """

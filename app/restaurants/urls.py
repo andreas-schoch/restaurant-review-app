@@ -1,15 +1,15 @@
 from django.urls import path
 from .views import (GetAllRestaurantsView,
-                    GetPostUpdateDeleteRestaurant,
-                    GetRestaurantByCategory,
-                    GetRestaurantByUserID)
+                    GetPostUpdateDeleteRestaurantView,
+                    GetRestaurantByCategoryView,
+                    GetRestaurantByUserIDView)
 
 
 urlpatterns = [
     path("", GetAllRestaurantsView.as_view(), name="get-list-of-all-restaurants"),
-    path("category/<str:category>/", GetRestaurantByCategory.as_view(), name="get-restaurant-by-category"),
-    path("<int:pk>/", GetPostUpdateDeleteRestaurant.as_view(), name="get-post-delete-update-restaurant"),
-    path("user/<int:user_id>/", GetRestaurantByUserID.as_view(), name="get-restaurants-by-user-id"),
+    path("category/<str:category>/", GetRestaurantByCategoryView.as_view(), name="get-restaurant-by-category"),
+    path("<int:pk>/", GetPostUpdateDeleteRestaurantView.as_view(), name="get-post-delete-update-restaurant"),
+    path("user/<int:user_id>/", GetRestaurantByUserIDView.as_view(), name="get-restaurants-by-user-id"),
 ]
 
 
