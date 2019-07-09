@@ -43,15 +43,21 @@ services:
       - app
     networks:
       - nginx_network
-      - nginx_host
+
+  portainer:
+  image: portainer/portainer
+  restart: always
+  volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/portainer/data:/data
+  networks:
+      - nginx_network
 
 networks:  # <-- and here
   nginx_network:
     driver: bridge
   database1_network:  # <-- add the bridge
     driver: bridge
-  nginx_host:
-    driver: host
 
 volumes:
   database:
