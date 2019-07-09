@@ -24,6 +24,8 @@ services:
       - ./media-files:/media-files
       - ./static-files:/static-files
       - ./scripts:/scripts
+      - frontend:/frontend/build
 
 volumes:
   database:
+  frontend:
