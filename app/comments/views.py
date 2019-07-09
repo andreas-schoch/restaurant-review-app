@@ -1,65 +1,56 @@
-# from rest_framework.generics import (ListAPIView,
-#                                      CreateAPIView,
-#                                      DestroyAPIView,
-#                                      RetrieveUpdateDestroyAPIView)
-
-# from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics, status
 
 from api.models import Comment
 from .serializers import CommentsSerializer
+from rest_framework.generics import get_object_or_404
 
 
-class CommentCreateAPIView(APIView):
+class CommentListCreateAPIView(generics.ListCreateAPIView):
     """
-    Class to POST a Comment
+    Class to GET all Comments or POST a Comment for a restaurant
     """
-
-    def get(self, request):
-        comment = Comment.objects.first()
-        serializer = CommentsSerializer(comment)
-        return Response({"This is a typical Json post": {"required": "title, body, author"}, "data": serializer.data})
+    serializer_class = CommentsSerializer
+    queryset = Comment.objects.all()
+    permission_classes = []
+    authentication_classes = []
 
     def post(self, request):
         serializer = CommentsSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"Status 201": "Post created succesfully"},status=status.HTTP_201_CREATED)
+            return Response({"Status 201": "Comment created succesfully"}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-#
-# class UserComments(ListAPIView):
-#     serializer_class = CommentsSerializer
-#     queryset = Comment.objects.all()
-#
-#     def get_queryset(self):
-#         return self.queryset.filter(comment_owner__id=self.kwargs.get('pk'))
 
-#
-# # making a new comment
-# class CreateReviewsComments(CreateAPIView):
-#     serializer_class = CommentsSerializer
-#     queryset = Comments_on_reviews.objects.all()
-#
-#     def get_object(self):
-#         try:
-#             return Restaurant_review.objects.get(pk=self.kwargs.get('pk'))
-#         except Restaurant_review.DoesNotExist:
-#             raise NotFound('Review not found with id whatever')
-#
-#     def perform_create(self, serializer):
-#         serializer.save(restaurant_review=self.get_object(), comment_owner=self.request.user)
-#
-#
-# # delete a comment
-# class DeleteReviewsComments(DestroyAPIView):
-#     serializer_class = CommentsSerializer
-#     queryset = Comments_on_reviews.objects.all()
-#
-#     def get_queryset(self):
-#         return self.queryset.filter(id=self.kwargs.get('pk'))
+class CommentDeleteUpdateRestaurant(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Class to GET - PUT/PATCH (UPDATE) - DELETE: Comment by id
+    """
+    serializer_class = CommentsSerializer
+
+    def get_object(self, pk):
+        post = get_object_or_404(Comment, pk=pk)
+        return post
+
+    def get(self, request, pk):
+        post = self.get_object(pk)
+        serializer = CommentsSerializer(post)
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        post = self.get_object(pk)
+        serializer = CommentsSerializer(post, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"Status 201": "Comment updated succesfully"}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        post = self.get_object(pk)
+        post.delete()
+        return Response({"Status 204": "Comment deleted succesfully"}, status=status.HTTP_204_NO_CONTENT)
 #
 #
 # # Like and Remove a Like  from a review comment

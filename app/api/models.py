@@ -1,12 +1,13 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-# from app_api.helpers import code_generator
+from api.helpers import generate_code
 
 User = get_user_model()
 
 CATEGORY_CHOICES = (('Asian', 'Asian'), ('Italian', 'Italian'),
                     ('Swiss', 'Swiss'), ('Greek', 'Greek'),)
 
+RATING_CHOICES = ((1, 1), (2, 2), (3, 3), (4, 4), (5, 5))
 
 class UserProfile(models.Model):
     user = models.OneToOneField(
@@ -20,14 +21,16 @@ class UserProfile(models.Model):
     bio = models.CharField(max_length=300, blank=True)
     interests = models.CharField(null=True, blank=True, max_length=30)
     profile_pic = models.ImageField(null=True, blank=True)
-    # code = models.CharField(
-    #     verbose_name='code',
-    #     help_text='random code used for registration and for password reset',
-    #     max_length=15,
-    #     default=code_generator,
-    #     null=True,
-    #     blank=True
-    # )
+    code = models.CharField(
+        verbose_name='code',
+        max_length=255,
+        default=generate_code,
+    )
+
+    def generate_new_code(self):
+        self.code = generate_code()
+        self.save()
+        return self.code
 
     def __str__(self):
         return self.user.username
@@ -51,6 +54,14 @@ class Restaurant(models.Model):
     opening_hours = models.CharField(null=True, blank=True, max_length=30)
     price_level = models.IntegerField(null=True, blank=True)
     restaurant_pic = models.ImageField(null=True, blank=True, max_length=30)
+    restaurant_owner = models.ForeignKey(
+        verbose_name='restaurant_owner',
+        related_name='owned_restaurants',
+        to=User,
+        on_delete=models.CASCADE
+    )
+    created = models.DateTimeField(auto_now=True)
+    updated = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
@@ -74,10 +85,14 @@ class Comment(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     image = models.ImageField(null=True, blank=True)
-    # likes = models.IntegerField()
+    rating = models.IntegerField(
+        verbose_name='rating',
+        default=0,
+        choices=RATING_CHOICES
+    )
 
     def __str__(self):
-        return f"{str(self.author).upper()}'s Comment for {str(self.restaurant).upper()}"
+        return f"{str(self.author).upper()} Commented for {str(self.restaurant).upper()}"
 
 
 class Reaction(models.Model):
@@ -98,23 +113,3 @@ class Reaction(models.Model):
     def __str__(self):
         return f"Liked: {self.comment}"
 
-
-class Ownership(models.Model):
-    class Meta:
-        unique_together = (('owner', 'restaurant'),)
-
-    owner = models.ForeignKey(
-        to=User,
-        verbose_name='Owner',
-        on_delete=models.CASCADE,
-        related_name='owners'
-    )
-    restaurant = models.ForeignKey(
-        to=Restaurant,
-        verbose_name='Restaurant',
-        on_delete=models.CASCADE,
-        related_name='owner_restaurants'
-    )
-
-    def __str__(self):
-        return f"{str(self.owner).upper()} is the Owner of {str(self.restaurant).upper()}!"
