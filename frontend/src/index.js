@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import './css/index.css';
-import App from './components/App';
+import './index.css';
 import { Provider } from 'react-redux'
 import {  BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { store } from './store'
 
+import App from './components/App';
+//import Login from './components/Login'
 import Home from './components/Home';
+import UserProfile from './components/UserProfile';
+import Login from './components/Login';
 
 
 ReactDOM.render(
@@ -14,8 +17,9 @@ ReactDOM.render(
         <Router>
             <Switch>
                 <App>
-
-                    <Route exact path='/' exact component={ Home } />
+                    <Route  path='/' exact component={ Home } />
+                    <Route  path='/login' exact component={ Login } />
+                    <Route  path='/me' component={ UserProfile } />
                 </App>
             </Switch>
         </Router>
