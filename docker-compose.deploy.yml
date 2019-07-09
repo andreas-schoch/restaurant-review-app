@@ -13,6 +13,7 @@ services:
     volumes:
       - static-files:/static-files
       - media-files:/media-files
+      - frontend:/frontend/build
     depends_on:
       - database
 
