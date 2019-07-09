@@ -1,0 +1,24 @@
+.main-header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    height: 75px;
+    align-items: center;
+    padding: 0 20px;
+    .main-header-nav > a {
+        margin-left: 30px;
+    }
+    .main-header-btns {
+        margin-left: 50px;
+        & > button:first-child {
+            border-radius: 30px 0 0 30px;
+        }
+        & > button:last-child {
+            border-radius: 0 30px 30px 0;
+        }
+    }
+}
+
+.main-header-logo {
+    margin-right: auto;
+}
