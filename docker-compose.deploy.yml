@@ -43,12 +43,15 @@ services:
       - app
     networks:
       - nginx_network
+      - nginx_host
 
 networks:  # <-- and here
   nginx_network:
     driver: bridge
   database1_network:  # <-- add the bridge
     driver: bridge
+  nginx_host:
+    driver: host
 
 volumes:
   database:
