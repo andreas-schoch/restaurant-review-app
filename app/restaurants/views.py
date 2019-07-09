@@ -33,31 +33,13 @@ class GetAllRestaurantsView(ListCreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
-
-# class CreateNewRestaurantView(APIView):
-#     """
-#     Class to create a Post for the Post Application
-#     """
-#
-#     def get(self, request):
-#         restaurant = Restaurant.objects.first()
-#         serializer = RestaurantsSerializer(restaurant)
-#         return Response({"This is a typical Json post": {"required": "title, body, author"}, "data": serializer.data})
-#
-#     def post(self, request):
-#         serializer = RestaurantsSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response({"Status 201": "Restaurant created succesfully"},status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-# # GET - PUT/PATCH (UPDATE) - DELETE: Restaurant by id
-# class GetPostDeleteRestaurant(RetrieveUpdateDestroyAPIView):
-#     permission_classes = (RestaurantPatchDeletePutPermission,)
-#     serializer_class = RestaurantsSerializer
-#     queryset = Restaurant.objects.all()
+class GetPostDeleteRestaurant(RetrieveUpdateDestroyAPIView):
+    """
+    GET - PUT/PATCH (UPDATE) - DELETE: Restaurant by id
+    """
+    permission_classes = (RestaurantPatchDeletePutPermission,)
+    serializer_class = RestaurantsSerializer
+    queryset = Restaurant.objects.all()
 #
 #
 # # GET: Get the all the restaurants created by a specific user in chronological order.
