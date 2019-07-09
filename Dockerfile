@@ -26,7 +26,8 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 RUN mkdir -p /app && \
     mkdir -p /scripts && \
     mkdir -p /media-files && \
-    mkdir -p /static-files
+    mkdir -p /static-files && \
+    mkdir -p /frontend
 
 COPY ./app/requirements.yml /app/requirements.yml
 
@@ -44,8 +45,6 @@ COPY ./frontend /frontend
 WORKDIR /frontend
 
 RUN npm install --silent
-RUN npm install react-scripts@1.1.1 -g --silent
-COPY . /usr/src/app
 RUN npm run build
 
 
