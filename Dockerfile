@@ -8,6 +8,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -qqy \
     libssl-dev \
     openssh-server
 
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && apt-get install -y nodejs
+
 # Start: SSH
 RUN mkdir /var/run/sshd
 RUN echo 'root:screencast' | chpasswd
@@ -30,12 +32,19 @@ COPY ./app/requirements.yml /app/requirements.yml
 
 RUN /opt/conda/bin/conda env create -f /app/requirements.yml
 ENV PATH /opt/conda/envs/app/bin:$PATH
-RUN sed '$ a conda activate app' -i /root/.bashrc
+RUN sed '$ a source activate app' -i /root/.bashrc
 
 COPY ./app /app
 
 COPY ./scripts /scripts
 RUN chmod +x /scripts/*
+
+COPY ./frontend /frontend
+
+WORKDIR /frontend
+
+RUN npm install && npm run build
+
 
 WORKDIR /app
 
