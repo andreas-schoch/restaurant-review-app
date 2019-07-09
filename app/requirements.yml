@@ -13,3 +13,5 @@ dependencies:
     - coreapi==2.3.3
     - flake8==3.5.0
     - django-cors-headers
+    - drf_writable_nested
+    - pillow
