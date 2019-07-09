@@ -45,13 +45,13 @@ services:
       - nginx_network
 
   portainer:
-  image: portainer:latest
-  restart: always
-  volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /opt/portainer/data:/data
-  networks:
-      - nginx_network
+    image: portainer/portainer
+    restart: always
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - /opt/portainer/data:/data
+    networks:
+        - nginx_network
 
 networks:  # <-- and here
   nginx_network:
