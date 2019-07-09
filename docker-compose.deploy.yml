@@ -2,7 +2,7 @@ version: '3'
 services:
 
   app:
-    image: registry.gitlab.propulsion-home.ch/full-stack/batch-05-2019/group-projects/aries
+    image: registry.gitlab.propulsion-home.ch/full-stack/batch-05-2019/group-projects/aries:master
     restart: always
     networks:
       - nginx_network
