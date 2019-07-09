@@ -47,7 +47,7 @@ services:
   portainer:
     image: portainer/portainer
     restart: always
-    command: bash -c "-H unix:///var/run/docker.sock && --ssl --sslcert /certs/live/jable.co/cert.pem && --sslkey /certs/live/jable.co/privkey.pem"
+    command: /bin/bash -c "-H unix:///var/run/docker.sock && --ssl --sslcert /certs/live/jable.co/cert.pem && --sslkey /certs/live/jable.co/privkey.pem"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /opt/portainer/data:/data
