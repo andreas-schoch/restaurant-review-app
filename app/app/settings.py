@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+from datetime import timedelta
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -44,7 +45,9 @@ INSTALLED_APPS = [
     'api',
     'users',
     'restaurants',
-    'comments'
+    'comments',
+    'registration',
+    'authentication',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +132,30 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'uploads'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
+
+# Configuration for using simplejwt library
+SIMPLE_JWT = {
+   "ACCESS_TOKEN_LIFETIME": timedelta(days=5),
+   "REFRESH_TOKEN_LIFETIME": timedelta(days=5),
+}
+
+
+# Email settings
+BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'students@propulsionacademy.com'
+EMAIL_HOST_PASSWORD = 'VNZ4NVUTa8LM{i38{zCGjCG6ewjaNnR8Njhph@Rf'
+DEFAULT_FROM_EMAIL = 'students@propulsionacademy.com'
