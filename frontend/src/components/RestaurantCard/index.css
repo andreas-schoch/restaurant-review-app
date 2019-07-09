@@ -1,8 +1,8 @@
 .restaurant-card {
-    box-shadow: 0 0 0 1px black;
     display: inline-block;
     border-top: 5px solid orange;
     background: #fff;
-
+    margin: 15px;
+    width: 270px;
 }
 

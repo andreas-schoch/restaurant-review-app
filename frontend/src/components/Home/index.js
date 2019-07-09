@@ -7,7 +7,14 @@ import BestRestaurantsList from "../BestRestaurantsList";
 
 // this page was supposed to display the 4 best rated restaurants.
 // but because we dont do reviews anymore, lets just show the 4 with the most comments.
-const Home = (props) => <BestRestaurantsList />;
+const Home = (props) => {
+    return (
+        <>
+            <SearchHeader/>
+            <BestRestaurantsList />;
+        </>
+    )
+}
 
 
 export default Home;
