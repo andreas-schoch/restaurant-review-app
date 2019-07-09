@@ -2,7 +2,7 @@ version: '3'
 services:
 
   app:
-    image: registry.gitlab.propulsion-home.ch/x/motion-backend
+    image: registry.gitlab.propulsion-home.ch/full-stack/batch-05-2019/group-projects/aries
     restart: always
     networks:
       - nginx_network
