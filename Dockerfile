@@ -44,7 +44,7 @@ COPY ./frontend /frontend
 
 WORKDIR /frontend
 
-RUN npm install --silent
+RUN npm install express@latest --save --force
 RUN npm run build
 
 
