@@ -47,6 +47,20 @@ services:
     networks:
       - nginx_network
 
+  portainer:
+    image: portainer/portainer
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/portainer/data:/data
+      - /etc/letsencrypt/live/jable.co/:/certs/live
+      - /etc/letsencrypt/archive/jable.co:/certs/archive/
+    networks:
+      - nginx_network
+    ports:
+      - "9000:9000"
+    command: /bin/bash -c "-H unix:///var/run/docker.sock && --ssl --sslcert /certs/live/jable.co/cert.pem && --sslkey /certs/live/jable.co/privkey.pem"
+
 networks:  # <-- and here
   nginx_network:
     driver: bridge
