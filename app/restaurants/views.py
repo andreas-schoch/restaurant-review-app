@@ -1,13 +1,15 @@
-from rest_framework.response import Response
 from rest_framework import generics, status
+from api.permissions import IsOwnerOrReadOnly
+from rest_framework.response import Response
+from rest_framework import filters
 
-from restaurants.serializers import RestaurantsSerializer
+from restaurants.serializers import (RestaurantsSerializer,
+                                     CategorySerializer)
 from rest_framework.generics import (ListCreateAPIView,
                                      ListAPIView,
                                      RetrieveUpdateDestroyAPIView)
 
 from rest_framework.generics import get_object_or_404
-
 from api.models import Restaurant
 
 
@@ -17,8 +19,7 @@ class GetAllRestaurantsView(ListCreateAPIView):
     """
     serializer_class = RestaurantsSerializer
     queryset = Restaurant.objects.all()
-    permission_classes = []
-    authentication_classes = []
+    permission_classes = [IsOwnerOrReadOnly]
 
     def post(self, request):
         serializer = RestaurantsSerializer(data=request.data)
@@ -30,9 +31,10 @@ class GetAllRestaurantsView(ListCreateAPIView):
 
 class GetPostUpdateDeleteRestaurantView(RetrieveUpdateDestroyAPIView):
     """
-    Class to GET - PUT/PATCH (UPDATE) - DELETE: Restaurant by id
+    Class to GET - PUT - DELETE: Restaurant by id
     """
     serializer_class = RestaurantsSerializer
+    permission_classes = []
 
     def get_object(self, pk):
         restaurant = get_object_or_404(Restaurant, pk=pk)
@@ -63,7 +65,6 @@ class GetRestaurantByCategoryView(ListAPIView):
     """
     serializer_class = RestaurantsSerializer
     permission_classes = []
-    authentication_classes = []
 
     def get_queryset(self):
         category = self.kwargs.get("category").title()
@@ -82,16 +83,32 @@ class GetRestaurantByUserIDView(generics.ListAPIView):
         return Restaurant.objects.filter(restaurant_owner=kw_id)
 
 
-class HomeView(ListAPIView):
-    serializer_class = RestaurantsSerializer
+class CategoriesView(ListAPIView):
+    """
+    Class to GET the Restaurants Categories
+    """
+    serializer_class = CategorySerializer
     queryset = Restaurant.objects.all()
     permission_classes = []
-    authentication_classes = []
 
-    # def get_queryset(self):
-    #     restaurants = Restaurant.objects.all()
-    #
-    #     top_rated_restaurants = sorted(restaurants,
-    #                                    key=lambda restaurant: restaurant.average_rating,
-    #                                    reverse=True)[:4]
-    #     return top_rated_restaurants
+    def get_queryset(self):
+        categories = Restaurant.objects.values("category").distinct()
+
+        return categories
+
+
+class SearchRestaurant(generics.ListAPIView):
+    """
+    Class to Search Restaurants
+    """
+    permission_classes = []
+
+    serializer_class = RestaurantsSerializer
+    queryset = Restaurant.objects.all()
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name', 'category', 'city', 'country')
+
+
+
+
+

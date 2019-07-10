@@ -7,7 +7,6 @@ from .serializers import (PasswordResetSerializer,
 
 class PasswordResetView(GenericAPIView):
     permission_classes = []
-    authentication_classes = []
     serializer_class = PasswordResetSerializer
 
     def post(self, request):
@@ -21,7 +20,6 @@ class PasswordResetView(GenericAPIView):
 
 class PasswordResetValidationView(GenericAPIView):
     permission_classes = []
-    authentication_classes = []
     serializer_class = PasswordResetValidationSerializer
 
     def post(self, request):
