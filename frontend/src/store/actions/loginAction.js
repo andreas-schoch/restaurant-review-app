@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ERROR, LOGIN, LOGOUT } from "../types";
 
-const URL = `https://motion.propulsion-learn.ch/backend`;
+const URL = `https://jable.co/`;
 
 export const login = (token, refresh) => {
   return {
@@ -27,7 +27,7 @@ export const logout = () => {
 export const loginAction = ({ username, password }) => async dispatch => {
   try {
     // console.log(username);
-    const response = await axios.post(`${URL}/api/auth/token/`, {
+    const response = await axios.post(`${URL}api/token/`, {
       username,
       password
     });
@@ -49,7 +49,7 @@ export const refreshAction = token => async dispatch => {
 
   try {
     // console.log(username);
-    const response = await axios.post(`${URL}/api/auth/token/refresh`, body);
+    const response = await axios.post(`${URL}/api/token/refresh`, body);
     const token = response.data.access;
     console.log(token);
     localStorage.setItem("token", token);

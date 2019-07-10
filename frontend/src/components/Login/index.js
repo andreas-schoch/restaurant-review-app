@@ -1,30 +1,37 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { loginAction } from "../../store/actions/loginAction";
 import './index.scss';
-import { loginAction } from '../../store/actions/loginAction';
+import { Button } from "../../styled";
 
-function Login(props) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+function Login({ dispatch, history }) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const login = async e => {
     e.preventDefault();
-    const tokens = await props.dispatch(loginAction(username, password));
-    if (tokens.access) props.history.push('/home');
+    const data = await dispatch(loginAction({ username, password }));
+    if (data) history.push("/feed");
   };
 
   return (
-    <form onSubmit={ login }>
+    <form onSubmit={login}>
       <input
-        type="text" value={ username } placeholder="Username" name="username"
-        onChange={ (e) => setUsername(e.target.value) }
+        type="text"
+        value={username}
+        placeholder="Your username"
+        name="username"
+        onChange={e => setUsername(e.target.value)}
       />
 
       <input
-        type="password" value={ password } placeholder="Password" name="password"
-        onChange={ (e) => setPassword(e.target.value) }
+        type="password"
+        value={password}
+        placeholder="Your password"
+        name="password"
+        onChange={e => setPassword(e.target.value)}
       />
-      <button>Login</button>
+      <Button>login</Button>
     </form>
   );
 }

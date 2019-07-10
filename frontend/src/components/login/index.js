@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { loginAction } from "../../store/actions/loginAction";
-import { LoginButton } from "../../stylesheet/login";
+import './index.scss';
 
 function Login({ dispatch, history }) {
   const [username, setUsername] = useState("");
