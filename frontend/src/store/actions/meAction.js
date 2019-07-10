@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ME } from "../types";
-const URL = `jable.co/api/`;
+const URL = `https://jable.co/api/`;
 
 export const me = data => {
   return {
@@ -10,7 +10,7 @@ export const me = data => {
 };
 export const getMe = () => async (dispatch, getState) => {
     console.log('hi')
-  const token = getState().loginReducer.token;
+  const token = getState().tokens.token;
   const config = {
     headers: {
       Authorization: `Bearer ${token}`
