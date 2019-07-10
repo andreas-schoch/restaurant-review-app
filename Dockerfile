@@ -45,6 +45,8 @@ COPY ./frontend /frontend
 WORKDIR /frontend
 
 RUN npm install --silent
+RUN ls -la
+RUN node -v
 RUN npm run build
 
 

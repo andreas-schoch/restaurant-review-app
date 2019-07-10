@@ -1,3 +1,16 @@
+@font-face {
+    font-family: "Bradley Hand ITC TT";
+    src: url("//db.onlinewebfonts.com/t/c8e367ed921e0b64eb40752644e1e353.eot");
+    src: url("//db.onlinewebfonts.com/t/c8e367ed921e0b64eb40752644e1e353.eot?#iefix") format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/c8e367ed921e0b64eb40752644e1e353.woff2") format("woff2"),
+    url("//db.onlinewebfonts.com/t/c8e367ed921e0b64eb40752644e1e353.woff") format("woff"),
+    url("//db.onlinewebfonts.com/t/c8e367ed921e0b64eb40752644e1e353.ttf") format("truetype"),
+    url("//db.onlinewebfonts.com/t/c8e367ed921e0b64eb40752644e1e353.svg#Bradley Hand ITC TT") format("svg");
+}
+
+@import "../../variables.scss";
+
+
 .main-header {
     display: flex;
     flex-flow: row nowrap;
@@ -6,11 +19,25 @@
     align-items: center;
     padding: 0 20px;
     background-color: white;
-    .main-header-nav > a {
-        margin-left: 30px;
-        font-size: 1.25rem;
-        color: #111;
+    .main-header-nav {
+        height: 100%;
+        line-height: 75px;
+        a {
+            text-align: center;
+            width: 100px;
+            height: calc(100% - 3px);
+            margin-left: 30px;
+            font-size: 1.25rem;
+            display: inline-block;
+            transition: box-shadow 0.2s;
+            color: #111;
+            &:hover {
+                box-shadow: 0 23px 0 -20px $color-orange;
+                font-weight: 600;
+            }
+        }
     }
+
     .main-header-btns {
         margin-left: 50px;
         & > button:first-child {
@@ -24,4 +51,6 @@
 
 .main-header-logo {
     margin-right: auto;
+    font-size: 2.25rem;
+    font-family: Bradley Hand ITC TT, Helvetica, Arial, sans-serif;
 }

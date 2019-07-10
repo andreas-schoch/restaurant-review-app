@@ -1,0 +1,9 @@
+@import "../../variables.scss";
+
+.card-base {
+    display: inline-block;
+    border-top: 5px solid $color-orange;
+    background: white;
+    margin: 15px;
+}
+

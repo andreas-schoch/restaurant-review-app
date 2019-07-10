@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-
+import './index.scss';
 import { loginAction } from '../../store/actions/loginAction';
 
 function Login(props) {
