@@ -13,6 +13,8 @@ import Login from './components/Login';
 import Search from './components/Search';
 import { refreshAction } from "./store/actions/loginAction";
 import jwtDecode from "jwt-decode";
+import { login } from "./store/actions/loginAction";
+import AuthComponent from "./HOC";
 
 const token = localStorage.getItem("token");
 if (token) {
