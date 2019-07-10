@@ -26,6 +26,9 @@ services:
       - database:/var/lib/postgresql/data
     networks:
       - database1_network
+    ports:
+      - "5432:5432"
+      - "5422:5422"
 
   nginx:
     image: nginx:latest
