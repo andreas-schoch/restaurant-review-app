@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from api.models import UserProfile
 from django.contrib.auth import get_user_model
-from drf_writable_nested import WritableNestedModelSerializer
 
 User = get_user_model()
 

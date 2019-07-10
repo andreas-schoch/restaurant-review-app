@@ -9,6 +9,7 @@ CATEGORY_CHOICES = (('Asian', 'Asian'), ('Italian', 'Italian'),
 
 RATING_CHOICES = ((1, 1), (2, 2), (3, 3), (4, 4), (5, 5))
 
+
 class UserProfile(models.Model):
     user = models.OneToOneField(
         verbose_name='user',
