@@ -10,18 +10,11 @@ from rest_framework import generics
 from django.contrib.auth import get_user_model
 from rest_framework.generics import get_object_or_404
 
-User = get_user_model()
-
-from api.models import (UserProfile,
-                        Restaurant,
-                        Reaction,
-                        Comment,
-                        Ownership)
 
 from users.serializers import (UserSerializer,
-                               UserProfileSerializer,
-                               UserNestedSerializer,
-                               )
+                               UserNestedSerializer)
+
+User = get_user_model()
 
 
 class UserProfilesView(generics.ListAPIView):
@@ -33,6 +26,7 @@ class UserProfilesView(generics.ListAPIView):
     #permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
 
+# TODO does not update the nested serializer (UserProfile)
 class GetUpdateUserProfileView(generics.RetrieveUpdateAPIView):
     """
     Class to GET and UPDATE the User's Profile
@@ -61,6 +55,7 @@ class UserProfileView(APIView):
         return Response(serializer.data)
 
 
+# TODO not fully functional
 class SearchUser(generics.ListAPIView):
     """
     Class to Search a User Profile
