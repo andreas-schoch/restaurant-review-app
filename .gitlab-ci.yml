@@ -2,7 +2,7 @@ stages:
   - pull
   # - build
   # - push
-  # - deploy
+  - deploy
   - cleanup
 
 before_script:
