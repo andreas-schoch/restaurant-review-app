@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import "./index.scss";
-import { getMe } from "../../store/actions/userAction";
+import { getMe } from "../../store/actions/meAction";
 
 
 const UserProfile = ({ dispatch, me}) => {
@@ -9,7 +9,6 @@ const UserProfile = ({ dispatch, me}) => {
         dispatch(getMe());
       }, []);
 
-      console.log(me)
   return (
     <div className="profile-wrapper">
       <div className="profile-info">
@@ -92,8 +91,9 @@ const UserProfile = ({ dispatch, me}) => {
 
 const mapStateToProps = (state) => {
     return {
-        me: state.meReducer.me
-    }
+        me: state.me.me,
+        token: state.tokens.token
+    };
 };
 
 export default connect(mapStateToProps) (UserProfile);

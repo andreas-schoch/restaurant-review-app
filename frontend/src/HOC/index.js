@@ -7,7 +7,7 @@ export default WrappedComponent => {
     const { tokens, history } = props;
 
     const userRedirect = () => {
-      if (!tokens.access) history.push('/login');
+      if (!tokens.access) history.push('/login/');
     };
 
     useEffect(() => {

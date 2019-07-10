@@ -11,14 +11,22 @@ import Home from './components/Home';
 import UserProfile from './components/UserProfile';
 import Login from './components/Login';
 import Search from './components/Search';
+import { refreshAction } from "./store/actions/loginAction";
+import jwtDecode from "jwt-decode";
+import { login } from "./store/actions/loginAction";
+import AuthComponent from "./HOC";
 
+const token = localStorage.getItem("token");
+if (token) {
+  store.dispatch(login(token));
+}
 
 ReactDOM.render(
     <Provider store={store}>
         <Router>
             <Switch>
                 <App>
-                    <Route  path='/' exact component={ Home } />
+                    <Route  path='/' exact component={ Redirecter } />
                     <Route  path='/login' exact component={ Login } />
                     <Route  path='/search' exact component={ Search } />
                     <Route  path='/restaurants'  component={ Login } />
@@ -29,4 +37,29 @@ ReactDOM.render(
         </Router>
     </Provider>
 , document.getElementById('root'));
+
+export function checker() {
+    try {
+      let decoded = jwtDecode(token);
+      let dateNow = new Date();
+      return decoded.exp < dateNow.getTime();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
+  function Redirecter(match) {
+    console.log(checker());
+    if (checker()) {
+      return (
+        <div>
+          <Route component={AuthComponent(Home)} />
+          <Route exact path={match.path} />
+        </div>
+      );
+    } else {
+      console.log("!token");
+      return refreshAction(token);
+    }
+  }
 

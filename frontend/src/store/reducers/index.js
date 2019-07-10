@@ -10,5 +10,5 @@ export const reducers = combineReducers({
     'restaurants': restaurantReducer,
     'comments': commentReducer,
     'users': userReducer,
-    'me' : meReducer
+    'me': meReducer
 });
