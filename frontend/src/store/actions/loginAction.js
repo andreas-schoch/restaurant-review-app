@@ -1,28 +1,61 @@
-import { ADD_TOKENS, REFRESH_TOKEN } from "../types";
-import axios from 'axios'
+import axios from "axios";
+import { ERROR, LOGIN, LOGOUT } from "../types";
 
-// TODO insert backend url when available and store it on a single place
-const url = '';
+const URL = `https://motion.propulsion-learn.ch/backend`;
 
-
-const login = (tokens) => {
-    return {
-        type: ADD_TOKENS,
-        payload: { tokens }
-    }
+export const login = (token, refresh) => {
+  return {
+    type: LOGIN,
+    token: token,
+    refresh: refresh
+  };
 };
 
+const error = error => {
+  return {
+    type: ERROR,
+    payload: error
+  };
+};
 
-export const loginAction = (username, password) => async (dispatch, getState) => {
-    try {
-        const res = await axios.post(`${ URL }/api/auth/token/`, { username, password });
+export const logout = () => {
+  return {
+    type: LOGOUT
+  };
+};
 
-        const tokens = { access: res.data.access, refresh: res.data.refresh};
-        localStorage.setItem('tokens', tokens);
+export const loginAction = ({ username, password }) => async dispatch => {
+  try {
+    // console.log(username);
+    const response = await axios.post(`${URL}/api/auth/token/`, {
+      username,
+      password
+    });
+    const token = response.data.access;
+    const refresh = response.data.refresh;
+    localStorage.setItem("token", token);
+    localStorage.setItem("refresh", refresh);
+    dispatch(login(token, refresh));
+    return response;
+  } catch (e) {
+    dispatch(error("Wrong username or password"));
+  }
+};
 
-        dispatch(login(tokens));
-        return tokens;
-    } catch (e) {
-        console.error('user does not exist'); // TODO change to error object
-    }
+export const refreshAction = token => async dispatch => {
+  const body = {
+    refresh: token
+  };
+
+  try {
+    // console.log(username);
+    const response = await axios.post(`${URL}/api/auth/token/refresh`, body);
+    const token = response.data.access;
+    console.log(token);
+    localStorage.setItem("token", token);
+    dispatch(login(token));
+    return response;
+  } catch (e) {
+    dispatch(error("something"));
+  }
 };

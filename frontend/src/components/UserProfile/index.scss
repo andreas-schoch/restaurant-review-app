@@ -1,0 +1,52 @@
+.profile-wrapper {
+    display: flex;
+    margin: 0 auto;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+.profile-info {
+  width: 15%;
+  .profile-picture-me {
+    width: 125px;
+  }
+}
+.profile-reviews-me-list {
+  width: 50rem;
+}
+.profile-reviews-me {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  .title {
+    font-size: 1.2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .time {
+      font-size: 0.8em;
+    }
+  }
+  .star {
+  }
+  .text {
+  }
+}
+.profile-about {
+  width: 20%;
+  .about-name {
+    font-size: 2em;
+  }
+  .about-list {
+    margin-top: 20px;
+  }
+}
+.profile-short-info {
+  .profile-short-info-name {
+    font-size: 1.3em;
+    font-style: bold;
+    .profile-short-info-short {
+      margin: 100px;
+    }
+  }
+}
