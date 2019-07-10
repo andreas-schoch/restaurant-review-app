@@ -2,7 +2,7 @@ version: '3'
 services:
 
   app:
-    image: registry.gitlab.propulsion-home.ch/x/motion-backend
+    image: registry.gitlab.propulsion-home.ch/full-stack/batch-05-2019/group-projects/aries:master
     restart: always
     networks:
       - nginx_network
@@ -13,6 +13,7 @@ services:
     volumes:
       - static-files:/static-files
       - media-files:/media-files
+      - frontend:/frontend-build
     depends_on:
       - database
 
@@ -33,6 +34,7 @@ services:
       - media-files:/media-files
       - ./nginx:/etc/nginx/conf.d
       - /etc/letsencrypt:/etc/letsencrypt
+      - frontend:/var/www/frontend
     ports:
       - "80:80"
       - "443:443"
@@ -41,6 +43,20 @@ services:
       - app
     networks:
       - nginx_network
+
+  portainer:
+    image: portainer/portainer
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/portainer/data:/data
+      - /etc/letsencrypt/live/jable.co/:/certs/live
+      - /etc/letsencrypt/archive/jable.co:/certs/archive/
+    networks:
+      - nginx_network
+    ports:
+      - "9000:9000"
+    command: /bin/bash -c "-H unix:///var/run/docker.sock && --ssl --sslcert /certs/live/jable.co/cert.pem && --sslkey /certs/live/jable.co/privkey.pem"
 
 networks:  # <-- and here
   nginx_network:
@@ -52,3 +68,4 @@ volumes:
   database:
   static-files:
   media-files:
+  frontend:
