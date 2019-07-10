@@ -4,7 +4,12 @@ import './index.css';
 
 const UserProfile = (props) =>  {
     return (
-        <div>UserProfile (me)</div>
+        <div>
+            <div>
+                {/* left section */}
+                <img className='profile-picture-me' src="./assets/img/default-profile-picture.jpg" alt="" />
+            </div>
+        </div>
     )
 }
 
