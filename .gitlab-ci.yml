@@ -1,8 +1,8 @@
 stages:
   - pull
-  - build
-  - push
-  - deploy
+  # - build
+  # - push
+  # - deploy
   - cleanup
 
 before_script:
@@ -14,25 +14,25 @@ pull:
   script:
     - docker pull "$CI_REGISTRY_IMAGE":latest
 
-build:
-  stage: build
-  script:
-    - docker build --tag="$CI_PIPELINE_ID":"$CI_COMMIT_REF_NAME" --cache-from="$CI_REGISTRY_IMAGE":latest .
+# build:
+#   stage: build
+#   script:
+#     - docker build --tag="$CI_PIPELINE_ID":"$CI_COMMIT_REF_NAME" --cache-from="$CI_REGISTRY_IMAGE":latest .
 
-push image:
-  stage: push
-  only:
-    - master
-    - tags
-  script:
-    - docker tag "$CI_PIPELINE_ID":"$CI_COMMIT_REF_NAME" "$CI_REGISTRY_IMAGE":"$CI_COMMIT_REF_NAME"
-    - docker push "$CI_REGISTRY_IMAGE":"$CI_COMMIT_REF_NAME"
+# push image:
+#   stage: push
+#   only:
+#     - master
+#     - tags
+#   script:
+#     - docker tag "$CI_PIPELINE_ID":"$CI_COMMIT_REF_NAME" "$CI_REGISTRY_IMAGE":"$CI_COMMIT_REF_NAME"
+#     - docker push "$CI_REGISTRY_IMAGE":"$CI_COMMIT_REF_NAME"
 
-push latest:
-  stage: push
-  script:
-    - docker tag "$CI_PIPELINE_ID":"$CI_COMMIT_REF_NAME" "$CI_REGISTRY_IMAGE":latest
-    - docker push "$CI_REGISTRY_IMAGE":latest
+# push latest:
+#   stage: push
+#   script:
+#     - docker tag "$CI_PIPELINE_ID":"$CI_COMMIT_REF_NAME" "$CI_REGISTRY_IMAGE":latest
+#     - docker push "$CI_REGISTRY_IMAGE":latest
 
 cleanup:
   stage: cleanup
