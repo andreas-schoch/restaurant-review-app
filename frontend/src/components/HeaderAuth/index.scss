@@ -1,0 +1,34 @@
+@import "../../variables.scss";
+
+
+.main-header-auth {
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    margin-left: 39px;
+    
+    a, button {
+        text-transform: uppercase;
+        text-align: center;
+        width: 100px;
+        font-size: 1rem;
+        color: #fff;
+        padding: 0.6rem 0;
+        border-radius: 30px;
+        background-color: var(--color-orange);
+        transition: background-color 0.2s;
+        &:hover { background-color: grey; }
+    }
+    a {
+        &:first-child { 
+            border-radius: 30px 0 0 30px; 
+        }
+        &:last-child { border-radius:  0 30px 30px 0; }  
+    }
+
+    button {
+        border: none;
+        outline: none;
+    }
+
+}
