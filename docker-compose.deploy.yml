@@ -28,7 +28,7 @@ services:
       - database1_network
     ports:
       - "5432:5432"
-      - "5422:5422"
+      - "5422:22"
 
   nginx:
     image: nginx:latest
