@@ -81,3 +81,17 @@ class GetRestaurantByUserIDView(generics.ListAPIView):
         kw_id = kwargs.get('user_id')  # --> returns the value of key='author_id'
         return Restaurant.objects.filter(restaurant_owner=kw_id)
 
+
+class HomeView(ListAPIView):
+    serializer_class = RestaurantsSerializer
+    queryset = Restaurant.objects.all()
+    permission_classes = []
+    authentication_classes = []
+
+    # def get_queryset(self):
+    #     restaurants = Restaurant.objects.all()
+    #
+    #     top_rated_restaurants = sorted(restaurants,
+    #                                    key=lambda restaurant: restaurant.average_rating,
+    #                                    reverse=True)[:4]
+    #     return top_rated_restaurants

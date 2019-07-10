@@ -2,7 +2,8 @@ from django.urls import path
 from .views import (GetAllRestaurantsView,
                     GetPostUpdateDeleteRestaurantView,
                     GetRestaurantByCategoryView,
-                    GetRestaurantByUserIDView)
+                    GetRestaurantByUserIDView,
+                    HomeView)
 
 
 urlpatterns = [
@@ -10,6 +11,8 @@ urlpatterns = [
     path("category/<str:category>/", GetRestaurantByCategoryView.as_view(), name="get-restaurant-by-category"),
     path("<int:pk>/", GetPostUpdateDeleteRestaurantView.as_view(), name="get-post-delete-update-restaurant"),
     path("user/<int:user_id>/", GetRestaurantByUserIDView.as_view(), name="get-restaurants-by-user-id"),
+    path("home/", HomeView.as_view(), name="get-4-best-restaurants"),
+
 ]
 
 
