@@ -11,7 +11,7 @@ function Login({ dispatch, history }) {
   const login = async e => {
     e.preventDefault();
     const data = await dispatch(loginAction({ username, password }));
-    if (data) history.push("/feed");
+    if (data) history.push("/home");
   };
 
   return (
