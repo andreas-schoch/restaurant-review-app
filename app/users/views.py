@@ -1,15 +1,10 @@
-# from api.permissions import IsOwnerOrReadOnly
-# from rest_framework.permissions import IsAuthenticated
-
 from rest_framework.response import Response
 from rest_framework import filters
 from rest_framework.views import APIView
 from rest_framework import generics
 
-
 from django.contrib.auth import get_user_model
 from rest_framework.generics import get_object_or_404
-
 
 from users.serializers import (UserSerializer,
                                UserNestedSerializer)
@@ -23,7 +18,6 @@ class UserProfilesView(generics.ListAPIView):
     """
     queryset = User.objects.all()
     serializer_class = UserNestedSerializer
-    #permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
 
 # TODO does not update the nested serializer (UserProfile)
@@ -31,11 +25,13 @@ class GetUpdateUserProfileView(generics.RetrieveUpdateAPIView):
     """
     Class to GET and UPDATE the User's Profile
     """
+    permission_classes = []
+
     serializer_class = UserNestedSerializer
     queryset = User.objects.all()
 
     def get_queryset(self):
-        self.kwargs['pk'] = self.request.user.id  # the view expects a lookup field in the url e.g. api/me/<pk>
+        self.kwargs['pk'] = self.request.user.id
 
         return self.queryset
 
@@ -55,13 +51,11 @@ class UserProfileView(APIView):
         return Response(serializer.data)
 
 
-# TODO not fully functional
 class SearchUser(generics.ListAPIView):
     """
-    Class to Search a User Profile
+    Class to Search User Profiles
     """
     permission_classes = []
-    authentication_classes = []
 
     serializer_class = UserSerializer
     queryset = User.objects.all()

@@ -1,11 +1,11 @@
 from rest_framework.response import Response
 from rest_framework import generics, status
+from rest_framework import filters
 
 from api.models import (Comment,
                         Reaction)
 from .serializers import (CommentsSerializer,
-                          ReactionSerializer,
-                          ReactionLightSerializer)
+                          ReactionSerializer)
 from rest_framework.generics import get_object_or_404
 from django.db.models import Q
 
@@ -17,7 +17,6 @@ class CommentListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = CommentsSerializer
     queryset = Comment.objects.all()
     permission_classes = []
-    authentication_classes = []
 
     def post(self, request):
         serializer = CommentsSerializer(data=request.data)
@@ -32,6 +31,7 @@ class CommentGetDeleteUpdateView(generics.RetrieveUpdateDestroyAPIView):
     Class to GET - PUT/PATCH (UPDATE) - DELETE: Comment by id
     """
     serializer_class = CommentsSerializer
+    permission_classes = []
 
     def get_object(self, pk):
         comment = get_object_or_404(Comment, pk=pk)
@@ -58,7 +58,7 @@ class CommentGetDeleteUpdateView(generics.RetrieveUpdateDestroyAPIView):
 
 class GetAllCommentsByUserIDView(generics.ListAPIView):
     """
-    Class to Get the all the Comments by a specific User in chronological order.
+    Class to GET  all the Comments by a specific User in chronological order.
     """
     serializer_class = CommentsSerializer
 
@@ -74,8 +74,6 @@ class CommentReactionsListAPIView(generics.ListAPIView):
     """
     serializer_class = ReactionSerializer
     queryset = Reaction.objects.all()
-    permission_classes = []
-    authentication_classes = []
 
 
 class LikeUnlikeCommentView(generics.ListCreateAPIView):
@@ -83,6 +81,7 @@ class LikeUnlikeCommentView(generics.ListCreateAPIView):
     Class to Like or Remove a Like from a comment
     """
     serializer_class = ReactionSerializer
+    permission_classes = []
 
     def get_object(self, comment_id):
         comment = get_object_or_404(Comment, pk=comment_id)
@@ -105,4 +104,17 @@ class LikeUnlikeCommentView(generics.ListCreateAPIView):
         Reaction.objects.filter(Q(user_reacted=self.request.user)
                                 & Q(comment=comment)).delete()
         return Response({"Status 204": "Comment unliked succesfully"}, status=status.HTTP_204_NO_CONTENT)
+
+
+class SearchComment(generics.ListAPIView):
+    """
+    Class to Search Restaurants
+    """
+    permission_classes = []
+
+    serializer_class = CommentsSerializer
+    queryset = Comment.objects.all()
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('body',)
+
 
