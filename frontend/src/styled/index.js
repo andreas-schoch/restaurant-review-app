@@ -4,9 +4,10 @@ import styled from 'styled-components'
 
 export const Button = styled.button`
   background-color: #E47D31;
+  cursor: pointer;
   color: white;
-  padding: 0.75rem;
-  font-size: 1em;
+  padding: 0.75rem 3rem;
+  font-size: 1.25rem;
   border-radius: 30px;
   border: none;
   outline: none;
