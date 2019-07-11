@@ -80,7 +80,7 @@ const mapStateToProps = (state) => {
     return {
         me: state.meReducer.me,
         token: localStorage.token,
-        comments: state.commentsReducer.comments
+        comments: state.commentReducer.comments
     };
 };
 
