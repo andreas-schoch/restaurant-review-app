@@ -25,7 +25,7 @@ const SearchRestaurants = (props) =>  {
 const mapStateToProps = (state, ownProps) => {
     const objToArr = (obj) => Object.values(obj).map(item => item);
     return { 
-        "restaurants": objToArr(state.restaurants)
+        "restaurants": objToArr(state.restaurantReducer)
     };
 };
 
