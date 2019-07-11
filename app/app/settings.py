@@ -162,3 +162,20 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'students@propulsionacademy.com'
 EMAIL_HOST_PASSWORD = 'VNZ4NVUTa8LM{i38{zCGjCG6ewjaNnR8Njhph@Rf'
 DEFAULT_FROM_EMAIL = 'students@propulsionacademy.com'
+
+CORS_ORIGIN_WHITELIST = [
+    "https://jable.co"
+    "http://localhost:8000",
+    "http://localhost:3000",
+    "http://localhost:5000",
+    "http://127.0.0.1:8000"
+)
+
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+)
