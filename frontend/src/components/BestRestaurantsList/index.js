@@ -1,24 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import './index.scss';
 import GenericRestaurantList from "../GenericRestaurantList";
 
-// this page was supposed to display the 4 best rated restaurants.
-// but because we dont do reviews anymore, lets just show the 4 with the most comments.
-// TODO create a container which filters the 4 most commented restaurants in the mapstatetoprops
 const BestRestaurantsList = (props) =>  {
+    console.log(props);
     return (
         <div className='best-restaurant-list'>
             <h2>Best Rated Restaurants</h2>
+            <span className='best-restaurant-list-heading-underline'></span>
             <GenericRestaurantList restaurants={ props.restaurants }/>
         </div>
     )
 };
 
-
 const mapStateToProps = (state, propsSoFar) => {
     const getBestRestaurants = (restaurants, amount) => {
-        // TODO refactor when backend available to filter the most commented restaurants or something.
+        // TODO refactor to filter the 4 best rated restaurants
         return Object.values(restaurants).map(restaurant => restaurant ).slice(0, amount);
     };
 

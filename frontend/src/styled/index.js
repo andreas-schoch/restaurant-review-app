@@ -13,7 +13,7 @@ export const Button = styled.button`
   outline: none;
   transition: background-color 0.2s;
   &:hover {
-    background-color: grey;
+    background-color: #c96722;
   }
 `;
 

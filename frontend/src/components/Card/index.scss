@@ -2,8 +2,13 @@
 
 .card-base {
     display: inline-block;
-    border-top: 5px solid $color-orange;
+    border-top: 8px solid $color-orange;
     background: white;
     margin: 15px;
+    box-shadow: 0 0 2px 0 rgba(0,0,0,0.14);
+    transition: box-shadow 0.15s;
+    &:hover {
+        box-shadow: 0 0 5px 0 rgba(0,0,0,0.2);
+    }
 }
 

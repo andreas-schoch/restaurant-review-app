@@ -17,11 +17,12 @@
         border-radius: 30px;
         background-color: var(--color-orange);
         transition: background-color 0.2s;
-        &:hover { background-color: grey; }
+        &:hover { background-color: var(--color-orange-strong); }
     }
     a {
         &:first-child { 
-            border-radius: 30px 0 0 30px; 
+            border-radius: 30px 0 0 30px;
+            margin-right: 2px;
         }
         &:last-child { border-radius:  0 30px 30px 0; }  
     }
