@@ -1,0 +1,11 @@
+.comment-card-narrow {
+    width: 270px;
+    min-height: 410px;
+    header {
+        font-size: 0.8rem;
+    }
+    & > div {
+        margin: 0;
+    }
+
+}
