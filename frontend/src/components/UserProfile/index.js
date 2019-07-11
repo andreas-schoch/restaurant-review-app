@@ -12,6 +12,8 @@ const UserProfile = ({ dispatch, me, comments}) => {
         let commentsArray = Object.valueOf(comments)
       }, []);
 
+      let commentsArray;
+
   return (
     (me && comments && (
     <div className="profile-wrapper">
