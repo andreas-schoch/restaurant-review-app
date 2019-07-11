@@ -91,8 +91,8 @@ const UserProfile = ({ dispatch, me}) => {
 
 const mapStateToProps = (state) => {
     return {
-        me: state.me.me,
-        token: state.tokens.token
+        me: state.meReducer.me,
+        token: state.loginReducer.token
     };
 };
 
