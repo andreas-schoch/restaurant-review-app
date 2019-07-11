@@ -2,7 +2,7 @@ import axios from "axios";
 import { COMMENTS } from "../types";
 const URL = `https://jable.co/api/`;
 
-export const comments = (data, id) => {
+export const comments = (data) => {
   return {
     type: COMMENTS,
     payload: data
