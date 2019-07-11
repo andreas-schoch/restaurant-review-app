@@ -26,7 +26,7 @@ SECRET_KEY = 'hi6tzifki3jzp&^-@$nolfh!%o$sl(wsw9yi*hbhkl_(q--v+t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '0.0.0.0', 'app']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,10 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-
     'api',
     'users',
     'restaurants',
@@ -53,12 +52,15 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'app.urls'
 
@@ -163,19 +165,3 @@ EMAIL_HOST_USER = 'students@propulsionacademy.com'
 EMAIL_HOST_PASSWORD = 'VNZ4NVUTa8LM{i38{zCGjCG6ewjaNnR8Njhph@Rf'
 DEFAULT_FROM_EMAIL = 'students@propulsionacademy.com'
 
-CORS_ORIGIN_WHITELIST = [
-    "https://jable.co"
-    "http://localhost:8000",
-    "http://localhost:3000",
-    "http://localhost:5000",
-    "http://127.0.0.1:8000"
-)
-
-CORS_ALLOW_METHODS = (
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-)
