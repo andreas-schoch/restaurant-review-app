@@ -1,3 +1,4 @@
+import { SAVE_RESTAURANTS } from "../types";
 
 
 const initial = {
@@ -209,6 +210,12 @@ const initial = {
 };
 
 export const restaurantReducer = (restaurants=initial, action) => {
-    return restaurants;
+    switch(action.type) {
+        case SAVE_RESTAURANTS:
+            const temp = {...restaurants, ...action.payload.restaurants};
+            return temp;
+        default:
+            return restaurants;
+    }
 };
 

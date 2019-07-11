@@ -12,8 +12,8 @@ const SearchRestaurants = (props) =>  {
             console.log("data", data);
         }
         console.log("useeffect called search restaurants");
-        makeTheRequest();
-    });
+        // makeTheRequest();
+    }, []);
 
     return (
         <div className='search-restaurant-list'>

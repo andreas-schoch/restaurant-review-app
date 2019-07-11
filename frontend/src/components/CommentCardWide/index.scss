@@ -1,0 +1,50 @@
+.comment-card-wide {
+    // width: 650px;
+    background-color: white;
+    margin-bottom: 15px;
+    box-shadow: 0 0 2px 0 rgba(0,0,0,0.14);
+    transition: box-shadow 0.15s;
+    &:hover {
+        box-shadow: 0 0 5px 0 rgba(0,0,0,0.2);
+    }
+    header {
+        border-bottom: 1px solid rgb(201, 201, 201);
+        padding-right: 10px;
+        img {
+            width: 66px;
+            height: 66px;
+        }
+        display: flex;
+        align-items: center;
+        .comment-card-wide-name-wrap {
+            padding: 10px;
+            margin-right: 10px;
+        }
+
+        .comment-card-wide-created {
+            margin-left: auto;
+        }
+
+    }
+    section {
+        padding: 10px;
+    }
+    footer {
+        padding: 10px;
+        button {
+            border: none;
+            background-color: rgb(179, 177, 177);
+            outline: none;
+            border-radius: 20px;
+            padding: 5px 1rem;
+            color: white;
+            transition: background-color 0.15s;
+            cursor: pointer;
+            &:hover {
+                background-color: rgb(151, 149, 149);
+            }
+        }
+
+    }
+}
+
