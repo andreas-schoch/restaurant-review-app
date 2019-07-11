@@ -9,8 +9,8 @@ export const me = data => {
   };
 };
 export const getMe = () => async (dispatch, getState) => {
-    console.log(getState().tokens)
-  const token = getState().tokens.token;
+    console.log(getState().loginReducer)
+  const token = getState().loginReducer.token;
   const config = {
     headers: {
       Authorization: `Bearer ${token}`
