@@ -58,7 +58,7 @@ class CommentGetDeleteUpdateView(generics.RetrieveUpdateDestroyAPIView):
 
 class GetAllCommentsByUserIDView(generics.ListAPIView):
     """
-    Class to GET  all the Comments by a specific User in chronological order.
+    Class to GET all the Comments by a specific User in chronological order
     """
     serializer_class = CommentsSerializer
 
@@ -107,7 +107,7 @@ class LikeUnlikeCommentView(generics.ListCreateAPIView):
 
 class SearchComment(generics.ListAPIView):
     """
-    Class to Search Restaurants
+    Class to Search Comments
     """
     permission_classes = []
 

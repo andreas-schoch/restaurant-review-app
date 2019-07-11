@@ -15,7 +15,7 @@ from api.models import Restaurant
 
 class GetAllRestaurantsView(ListCreateAPIView):
     """
-    Class to GET  the list of all Restaurants or POST a new Restaurant
+    Class to GET the list of all Restaurants or POST a new Restaurant
     """
     serializer_class = RestaurantsSerializer
     queryset = Restaurant.objects.all()
@@ -61,7 +61,7 @@ class GetPostUpdateDeleteRestaurantView(RetrieveUpdateDestroyAPIView):
 
 class GetRestaurantByCategoryView(ListAPIView):
     """
-    Class to GET all the restaurants by category
+    Class to GET all the Restaurants by category
     """
     serializer_class = RestaurantsSerializer
     permission_classes = []
@@ -73,7 +73,7 @@ class GetRestaurantByCategoryView(ListAPIView):
 
 class GetRestaurantByUserIDView(generics.ListAPIView):
     """
-    Class to Get the all the restaurants owned (created) by a specific user in chronological order.
+    Class to Get the all the Restaurants by owner
     """
     serializer_class = RestaurantsSerializer
 
@@ -85,7 +85,7 @@ class GetRestaurantByUserIDView(generics.ListAPIView):
 
 class CategoriesView(ListAPIView):
     """
-    Class to GET the Restaurants Categories
+    Class to GET the categories of the Restaurants
     """
     serializer_class = CategorySerializer
     queryset = Restaurant.objects.all()

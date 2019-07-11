@@ -23,7 +23,7 @@ class UserProfilesView(generics.ListAPIView):
 # TODO does not update the nested serializer (UserProfile)
 class GetUpdateUserProfileView(generics.RetrieveUpdateAPIView):
     """
-    Class to GET and UPDATE the User's Profile
+    Class to GET or UPDATE the User's Profile
     """
     permission_classes = []
 
@@ -61,6 +61,3 @@ class SearchUser(generics.ListAPIView):
     queryset = User.objects.all()
     filter_backends = (filters.SearchFilter,)
     search_fields = ('username', 'last_name', 'first_name', 'email')
-
-
-
