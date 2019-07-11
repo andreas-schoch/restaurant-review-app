@@ -1,8 +1,13 @@
+import { COMMENTS } from "../types";
+const initialState = {};
 
-
-const initial = [];
-
-export const commentReducer = (comments=initial, action) => {
-    return comments;
+export const commentReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case COMMENTS: {
+      return { ...state, comments: action.payload };
+    }
+    default:
+      return state;
+  }
 };
 
