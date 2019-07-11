@@ -8,8 +8,7 @@ import { getComments } from "../../store/actions/commentsAction";
 const UserProfile = ({ dispatch, me, comments}) => {
     useEffect(() => {
         dispatch(getMe());
-        dispatch(getComments(me.user_profile.id));
-        let commentsArray = Object.valueOf(comments)
+        dispatch(getComments());
       }, []);
 
       let commentsArray;
@@ -35,9 +34,22 @@ const UserProfile = ({ dispatch, me, comments}) => {
         <ul className="profile-short-info">
           <div className="profile-short-info-name">{me.username}</div>
           <div className="profile-short-info-short">{me.user_profile.location}</div>
-          <div className="profile-short-info-short">{commentsArray.length} Comments</div>
+          <div className="profile-short-info-short">3 Comments</div>
         </ul>
         <div className="profile-reviews-me">
+        {Object.values(comments).map((i, index) => {
+          console.log(i);
+          return (
+            <div key={index}>
+              <ul profile-reviews-me>
+                <li>{i.body}</li>
+                <li>{i.rating}</li>
+                <li>{i.created}</li>
+                <li>{i.restaurant.name}</li>
+              </ul>
+            </div>
+          );
+        })}
           <li className="text">
             {comments.body}
           </li>

@@ -16,7 +16,7 @@ export const getComments = (idUser) => async (dispatch, getState ) => {
       Authorization: `Bearer ${token}`
     }
   };
-  const response = await axios.get(`${URL}comments/${id}`, config);
+  const response = await axios.get(`${URL}comments/2`, config);
   const data = response.data;
   dispatch(comments(data));
 };
