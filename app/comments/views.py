@@ -81,7 +81,6 @@ class LikeUnlikeCommentView(generics.ListCreateAPIView):
     Class to Like or Remove a Like from a comment
     """
     serializer_class = ReactionSerializer
-    permission_classes = []
 
     def get_object(self, comment_id):
         comment = get_object_or_404(Comment, pk=comment_id)
@@ -116,5 +115,3 @@ class SearchComment(generics.ListAPIView):
     queryset = Comment.objects.all()
     filter_backends = (filters.SearchFilter,)
     search_fields = ('body',)
-
-

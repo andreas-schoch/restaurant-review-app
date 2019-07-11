@@ -6,7 +6,6 @@ from .views import (GetAllRestaurantsView,
                     CategoriesView,
                     SearchRestaurant)
 
-
 urlpatterns = [
     path("", GetAllRestaurantsView.as_view(), name="get-list-of-all-restaurants"),
     path("category/<str:category>/", GetRestaurantByCategoryView.as_view(), name="get-restaurant-by-category"),

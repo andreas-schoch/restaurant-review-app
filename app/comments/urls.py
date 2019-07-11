@@ -6,7 +6,6 @@ from .views import (CommentListCreateAPIView,
                     CommentReactionsListAPIView,
                     SearchComment)
 
-
 urlpatterns = [
     path('', CommentListCreateAPIView.as_view(), name='restaurant-comment'),
     path('<int:pk>/', CommentGetDeleteUpdateView.as_view(), name='comment-get-update-delete'),

@@ -22,6 +22,7 @@ class UserProfile(models.Model):
     bio = models.CharField(max_length=300, blank=True)
     interests = models.CharField(null=True, blank=True, max_length=30)
     profile_pic = models.ImageField(null=True, blank=True)
+    member_since = models.DateTimeField(auto_now=True)
     code = models.CharField(
         verbose_name='code',
         max_length=255,
@@ -112,5 +113,5 @@ class Reaction(models.Model):
         related_name='comments')
 
     def __str__(self):
-        return f"Liked: {self.comment}"
+        return f"{str(self.user_reacted).upper()} Liked: {self.comment}"
 

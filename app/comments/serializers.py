@@ -1,21 +1,24 @@
 from rest_framework import serializers
-from api.models import Comment, Reaction
+from restaurants.serializers import RestaurantsSerializer
+from api.models import (Comment,
+                        Reaction)
 
 
 class CommentsSerializer(serializers.ModelSerializer):
+
+    restaurant = RestaurantsSerializer(read_only=True)
 
     class Meta:
         model = Comment
         fields = ['id', 'author', 'restaurant', 'body', 'image', 'rating', 'created', 'modified']
         read_only_fields = ['id', 'created', 'modified']
 
-
-class ReactionLightSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Reaction
-        fields = ['id', 'comment']
-        read_only_fields = ['id']
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        return {
+            **data,
+            'likes_counter': instance.comments.count(),
+        }
 
 
 class ReactionSerializer(serializers.ModelSerializer):

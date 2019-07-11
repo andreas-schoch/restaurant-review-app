@@ -18,8 +18,8 @@ class UserSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ['id', 'location', 'phone', 'bio', 'interests', 'profile_pic']
-        read_only_fields = ['id']
+        fields = ['id', 'location', 'member_since', 'phone', 'bio', 'interests', 'profile_pic']
+        read_only_fields = ['id', 'member_since']
 
 
 class UserNestedSerializer(serializers.ModelSerializer):

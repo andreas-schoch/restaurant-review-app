@@ -107,8 +107,3 @@ class SearchRestaurant(generics.ListAPIView):
     queryset = Restaurant.objects.all()
     filter_backends = (filters.SearchFilter,)
     search_fields = ('name', 'category', 'city', 'country')
-
-
-
-
-
