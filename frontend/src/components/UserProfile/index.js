@@ -8,7 +8,7 @@ import { getComments } from "../../store/actions/commentsAction";
 const UserProfile = ({ dispatch, me, comments}) => {
     useEffect(() => {
         dispatch(getMe());
-        dispatch(getComments());
+        dispatch(getComments(me.user_profile.id));
         let commentsArray = Object.valueOf(comments)
       }, []);
 

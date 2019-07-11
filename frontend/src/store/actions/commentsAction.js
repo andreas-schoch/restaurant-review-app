@@ -8,9 +8,9 @@ export const comments = (data) => {
     payload: data
   };
 };
-export const getComments = () => async (dispatch, getState) => {
+export const getComments = (idUser) => async (dispatch, getState ) => {
   const token = getState().loginReducer.token;
-  const id = getState().meReducer.me.user_profile.id;
+  const id = idUser;
   const config = {
     headers: {
       Authorization: `Bearer ${token}`
