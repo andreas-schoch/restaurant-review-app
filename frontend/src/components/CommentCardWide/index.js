@@ -22,14 +22,14 @@ const CommentCardWide = (props) => {
                     <h4 className='comment-card-wide-name'>Firstname L.</h4>
                     <p> 32 comments in total</p>
                 </div>
-                <RatingReadOnly  className='rating' rating={3}/>
+                <RatingReadOnly  className='rating' rating={props.comment.rating}/>
                 {/* <span className='comment-card-wide-created'>{moment(Date.now()).fromNow()}</span> */}
             </header>
             <section>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc faucibus luctus ultrices. Quisque at nunc risus. In elementum faucibus velit, a dapibus tortor ullamcorper tristique. Nam congue pharetra suscipit. Aliquam erat volutpat. Nullam non odio lacus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                { props.comment.body}
             </section>
             <footer>
-                <button onClick={ clickLikeHandler }><i class="fas fa-thumbs-up"></i> {`Like ${40}`}</button>
+                <button onClick={ clickLikeHandler }><i class="fas fa-thumbs-up"></i> {`Like ${props.comment.likes_counter}`}</button>
             </footer>
         </div>
     );
