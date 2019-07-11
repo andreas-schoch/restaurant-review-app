@@ -4,11 +4,14 @@ import { restaurantReducer } from "./restaurantReducer";
 import { commentReducer } from "./commentReducer";
 import { userReducer } from "./userReducer";
 import { meReducer } from "./meReducer";
+import { loginReducer } from "./loginReducer";
 
 export const reducers = combineReducers({
-    'tokens': tokenReducer,
-    'restaurants': restaurantReducer,
-    'comments': commentReducer,
-    'users': userReducer,
-    'me': meReducer
+    tokenReducer,
+    restaurantReducer,
+    commentReducer,
+    userReducer,
+    meReducer,
+    loginReducer
+    
 });
