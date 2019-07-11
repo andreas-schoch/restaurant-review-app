@@ -2,14 +2,20 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import "./index.scss";
 import { getMe } from "../../store/actions/meAction";
+import { getComments } from "../../store/actions/commentsAction";
 
 
-const UserProfile = ({ dispatch, me}) => {
+const UserProfile = ({ dispatch, me, comments}) => {
     useEffect(() => {
         dispatch(getMe());
+        dispatch(getComments());
+        let commentsArray = Object.valueOf(comments)
       }, []);
 
+      let commentsArray;
+
   return (
+    (me && comments && (
     <div className="profile-wrapper">
       <div className="profile-info">
         {/* left section */}
@@ -18,9 +24,8 @@ const UserProfile = ({ dispatch, me}) => {
           src="./assets/img/default-profile-picture.jpg"
           alt=""
         />
-        <p>User's Name</p>
+        <p>{me.username}</p>
         <ul>
-          <li>Reviews</li>
           <li>Comments</li>
           <li>Restaurants</li>
           <li>EditProfile</li>
@@ -28,71 +33,54 @@ const UserProfile = ({ dispatch, me}) => {
       </div>
       <div className="profile-reviews-me-list">
         <ul className="profile-short-info">
-          <div className="profile-short-info-name">User's Name</div>
-          <div className="profile-short-info-short">Zürich, ZH</div>
-          <div className="profile-short-info-short">6 reviews</div>
-          <div className="profile-short-info-short">210 Comments</div>
+          <div className="profile-short-info-name">{me.username}</div>
+          <div className="profile-short-info-short">{me.user_profile.location}</div>
+          <div className="profile-short-info-short">{commentsArray.length} Comments</div>
         </ul>
         <div className="profile-reviews-me">
-          <div className="title">
-            Läderach.. oder <p className="time">01.01.2018 15:22</p>
-          </div>
           <li className="text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-            faucibus at odio id porta. Phasellus id sem augue. Donec non libero
-            ut magna dignissim iaculis quis vitae tellus. Fusce a arcu
-            fringilla, efficitur mi in, condimentum elit. Vestibulum eu arcu non
-            purus sagittis varius. Vivamus at dolor a diam porttitor.
-          </li>
-        </div>
-        <div className="profile-reviews-me">
-          <div className="title">
-            Läderach.. oder <p className="time">01.01.2018 15:22</p>
-          </div>
-          <li className="text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-            faucibus at odio id porta. Phasellus id sem augue. Donec non libero
-            ut magna dignissim iaculis quis vitae tellus. Fusce a arcu
-            fringilla, efficitur mi in, condimentum elit. Vestibulum eu arcu non
-            purus sagittis varius. Vivamus at dolor a diam porttitor.
+            {comments.body}
           </li>
         </div>
       </div>
       <div className="profile-about">
-        <div className="about-name">About User</div>
+        <div className="about-name">About {me.username}</div>
         <div className="about-list">
           <li>
-            <h2>Luna member since</h2>
+            <h2>Location</h2>
           </li>
-          <li>April, 2018</li>
+          <li>{me.user_profile.location}</li>
         </div>
         <div className="about-list">
           <li>
             <h2>Luna member since</h2>
           </li>
-          <li>April, 2018</li>
+          <li>{me.user_prile.member_since}</li>
         </div>
         <div className="about-list">
           <li>
-            <h2>Luna member since</h2>
+            <h2>Things I love</h2>
           </li>
-          <li>April, 2018</li>
+          <li>{me.user_profile.interests}</li>
         </div>
         <div className="about-list">
           <li>
-            <h2>Luna member since</h2>
+            <h2>Description</h2>
           </li>
-          <li>April, 2018</li>
+          <li>{me.user_profile.bio}</li>
         </div>
       </div>
     </div>
+    )) ||
+    null
   );
 };
 
 const mapStateToProps = (state) => {
     return {
         me: state.meReducer.me,
-        token: localStorage.token
+        token: localStorage.token,
+        comments: state.commentsReducer.comments
     };
 };
 
