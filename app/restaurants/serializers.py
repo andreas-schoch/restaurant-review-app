@@ -22,7 +22,7 @@ class RestaurantsSerializer(serializers.ModelSerializer):
     @staticmethod
     def get_ratings_avg(instance):
         try:
-            return sum([p.rating for p in instance.restaurants.all()])/instance.restaurants.count()
+            return sum([comment.rating for comment in instance.restaurants.all()])/instance.restaurants.count()
         except ZeroDivisionError:
             return 0
 
