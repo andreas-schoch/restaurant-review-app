@@ -7,4 +7,4 @@ export const LOGOUT = "logout";
 export const REGISTER = "register";
 export const USER = "user";
 export const REFRESH = 'refresh'
-
+export const SAVE_RESTAURANTS = 'save_restaurants';

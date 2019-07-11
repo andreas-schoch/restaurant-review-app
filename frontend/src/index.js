@@ -15,6 +15,11 @@ import { refreshAction } from "./store/actions/loginAction";
 import jwtDecode from "jwt-decode";
 import { login } from "./store/actions/loginAction";
 import AuthComponent from "./HOC";
+import SearchRestaurants from "./components/SearchRestaurants";
+import SearchComments from "./components/SearchComments";
+import SearchUsers from "./components/SearchUsers";
+import SearchControls from "./components/SearchControls";
+
 
 const token = localStorage.getItem("token");
 if (token) {
@@ -28,9 +33,7 @@ ReactDOM.render(
                 <App>
                     <Route  path='/' exact component={ Home } />
                     <Route  path='/login' exact component={ Login } />
-                    <Route  path='/search' exact component={ Search } />
-                    <Route  path='/restaurants'  component={ Login } />
-                    <Route  path='/restaurants/:restaurant_id'  component={ Login } />
+                    <Route  path='/search' component={ SearchControls } />
                     <Route  path='/me' component={ UserProfile } />
                 </App>
             </Switch>
@@ -47,7 +50,7 @@ export function checker() {
       console.log(error);
     }
   }
-  
+
   function Redirecter(match) {
     console.log(checker());
     if (checker()) {

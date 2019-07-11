@@ -12,6 +12,8 @@
 
 
 .main-header {
+    width: auto;
+    z-index: 1000;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -19,6 +21,7 @@
     align-items: center;
     padding: 0 20px;
     background-color: white;
+    box-shadow: 0 0 2px 0 rgba(0,0,0,0.14);
     .main-header-nav {
         height: 100%;
         line-height: 75px;
@@ -32,19 +35,12 @@
             transition: box-shadow 0.2s;
             color: #111;
             &:hover {
+                box-shadow: 0 23px 0 -20px $color-orange-light;
+            }
+            &.nav-active {
                 box-shadow: 0 23px 0 -20px $color-orange;
                 font-weight: 600;
             }
-        }
-    }
-
-    .main-header-btns {
-        margin-left: 50px;
-        & > button:first-child {
-            border-radius: 30px 0 0 30px;
-        }
-        & > button:last-child {
-            border-radius: 0 30px 30px 0;
         }
     }
 }
@@ -52,5 +48,5 @@
 .main-header-logo {
     margin-right: auto;
     font-size: 2.25rem;
-    font-family: Bradley Hand ITC TT, Helvetica, Arial, sans-serif;
+    font-family: "Bradley Hand ITC TT", Helvetica, Arial, sans-serif;
 }

@@ -1,0 +1,14 @@
+@import "../../variables.scss";
+
+.star-empty  span {
+    font-size: 16px;
+}
+
+
+
+.star-empty {
+    color: var(--color-star-empty);
+}
+.star-full {
+    color: var(--color-star-full);
+}

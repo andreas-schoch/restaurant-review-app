@@ -1,29 +1,30 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import './index.scss';
-import Rating from "../Rating";
 import Card from "../Card";
-import {  Link } from 'react-router-dom';
+import {  Link, withRouter } from 'react-router-dom';
+import RatingReadOnly from '../RatingReadOnly';
 
-
-
-function RestaurantCard(props) {
-    const address = 'combine restaurant address';
+function RestaurantCard({restaurant, match}) {
+    const address = `${restaurant.street}, ${restaurant.city} ${restaurant.zip}, ${restaurant.country}`;
   return (
     <Card>
+      <div className='restaurant-card-wrap'>
+          <Link to={`/search/restaurants/${restaurant.id}`}>
+            <div className='restaurant-card-pad'>
+              <h3>{restaurant.name}</h3>
+              <p>{address}</p>
 
-    <div className='restaurant-card-wrap'>
-        <Link to={'get-url-from-history'}>
-          <div className='restaurant-card-pad'>
-            <h3>{props.restaurant.name}</h3>
-            <p>{address}</p>
-            <Rating />
-          </div>
-            <img src='https://via.placeholder.com/270x280' alt='image of the restaurant'/>
-        </Link>
-    </div>
+              <div className='restaurant-card-rating'>
+                <RatingReadOnly rating={restaurant.ratings_avg}/>
+                <span className='restaurant-card-rating-count'>{restaurant.ratings_count}</span>
+              </div>
+
+            </div>
+            <img src='https://via.placeholder.com/270x680' alt='image of the restaurant'/>
+          </Link>
+      </div>
     </Card>
   );
 }
 
-export default RestaurantCard;
+export default withRouter(RestaurantCard);
