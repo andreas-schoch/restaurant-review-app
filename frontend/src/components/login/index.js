@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { loginAction } from "../../store/actions/loginAction";
 import './index.scss';
+import { Button } from "../../styled";
 
 function Login({ dispatch, history }) {
   const [username, setUsername] = useState("");
@@ -10,7 +11,7 @@ function Login({ dispatch, history }) {
   const login = async e => {
     e.preventDefault();
     const data = await dispatch(loginAction({ username, password }));
-    if (data) history.push("/feed");
+    if (data) history.push("/me");
   };
 
   return (
@@ -30,7 +31,7 @@ function Login({ dispatch, history }) {
         name="password"
         onChange={e => setPassword(e.target.value)}
       />
-      <LoginButton>login</LoginButton>
+      <Button>login</Button>
     </form>
   );
 }
