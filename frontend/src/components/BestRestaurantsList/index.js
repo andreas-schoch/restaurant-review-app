@@ -21,7 +21,7 @@ const mapStateToProps = (state, propsSoFar) => {
     };
 
     return {
-        'restaurants': getBestRestaurants(state.restaurants, 4),
+        'restaurants': getBestRestaurants(state.restaurantReducer, 4),
     }
 };
 
