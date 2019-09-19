@@ -10,7 +10,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -qqy \
 
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && apt-get install -y nodejs
 
-# Start: SSH
+# Start: SSH (temporary credentials)
 RUN mkdir /var/run/sshd
 RUN echo 'root:screencast' | chpasswd
 RUN sed -i '/PermitRootLogin/c\PermitRootLogin yes' /etc/ssh/sshd_config

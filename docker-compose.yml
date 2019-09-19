@@ -9,7 +9,7 @@ services:
       - database:/var/lib/postgresql/data
 
   app:
-    image: registry.gitlab.propulsion-home.ch/full-stack/batch-05-2019/group-projects/aries
+    build: .
     command: "/usr/sbin/sshd -D"
     restart: always
     env_file:

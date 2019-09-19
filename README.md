@@ -1,12 +1,8 @@
-# Motion Project
+# Restaurant Review Application
 
-- API Docs: https://motion.propulsion-home.ch/backend/docs/
-- Admin: https://motion.propulsion-home.ch/backend/admin/
+A restaurant reviewing web app using React & Redux for the frontend and the Django-REST-Framework and PostgreSQL for the backend. Made during 4 days by a team of 3 coding bootcamp students. 
 
-Welcome to the solutions of The Motion Project backend.
+[API Endpoints](./readme_files/Endpoints.md)
 
 ### Models Representation
-
-![models][models]
-
-[models]: ./readme_files/db.png
+![models](./readme_files/Model_Diagram.png)
